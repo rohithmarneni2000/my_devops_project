@@ -3,9 +3,10 @@ trigger:
     include:
       - main
 
+# AFTER - Your self-hosted Windows agent
 pool:
-  vmImage: 'ubuntu-latest'
-
+  name: 'Default'
+  
 variables:
   acrName: 'rohithacr2026'
   acrLoginServer: 'rohithacr2026.azurecr.io'
