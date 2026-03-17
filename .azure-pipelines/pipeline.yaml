@@ -3,7 +3,7 @@ trigger:
     include:
       - main
 
-# AFTER - Your self-hosted Windows agent
+# Self-hosted Windows agent
 pool:
   name: 'Default'
   
@@ -29,7 +29,7 @@ stages:
       displayName: 'Login to ACR'
       inputs:
         azureSubscription: 'Azure-Service-Connection'
-        scriptType: 'bash'
+        scriptType: 'ps'
         scriptLocation: 'inlineScript'
         inlineScript: |
           az acr login --name $(acrName)
@@ -62,7 +62,7 @@ stages:
       displayName: 'Deploy to AKS'
       inputs:
         azureSubscription: 'Azure-Service-Connection'
-        scriptType: 'bash'
+        scriptType: 'ps'
         scriptLocation: 'inlineScript'
         inlineScript: |
           az aks get-credentials --resource-group $(resourceGroup) --name $(aksCluster)
