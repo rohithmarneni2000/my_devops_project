@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: rohithmarnenimydevopsproject 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rohithmarnenimydevopsproject
+  template:
+    metadata:
+      labels:
+        app: rohithmarnenimydevopsproject 
+    spec:
+      containers:
+        - name: rohithmarnenimydevopsproject 
+          image: rohithacr2026.azurecr.io/rohithmarnenimydevopsproject
+          ports:
+          - containerPort: 8000
