@@ -1,7 +1,7 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rohithmarnenimydevopsproject 
+  name: rohithmarnenimydevopsproject
 spec:
   replicas: 1
   selector:
@@ -10,10 +10,16 @@ spec:
   template:
     metadata:
       labels:
-        app: rohithmarnenimydevopsproject 
+        app: rohithmarnenimydevopsproject
     spec:
       containers:
-        - name: rohithmarnenimydevopsproject 
+        - name: rohithmarnenimydevopsproject
           image: rohithacr2026.azurecr.io/rohithmarnenimydevopsproject
           ports:
-          - containerPort: 8000
+            - containerPort: 8000
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: neuralchat-secrets
+                  key: OPENAI_API_KEY
