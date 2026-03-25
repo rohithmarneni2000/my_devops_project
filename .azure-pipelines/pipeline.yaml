@@ -21,6 +21,12 @@ stages:
     pool:
       name: Default
     steps:
+    - script: |
+        echo "Build source dir: $(Build.SourcesDirectory)"
+        ls $(Build.SourcesDirectory)
+        ls $(Build.SourcesDirectory)/frontend
+      displayName: Debug - show files
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
