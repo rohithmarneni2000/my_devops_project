@@ -14,9 +14,6 @@ app = FastAPI(
     description="AI-Powered ChatBot API built with FastAPI and OpenAI"
 )
 
-# Serve static files (index.html)
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class ChatRequest(BaseModel):
@@ -31,11 +28,6 @@ class ChatResponse(BaseModel):
 @app.get("/health")
 def health_check():
     return {"status": "healthy", "app": os.getenv("APP_NAME")}
-
-# Serve chat UI at root
-@app.get("/")
-def root():
-    return FileResponse("static/index.html")
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
@@ -55,3 +47,6 @@ def chat(request: ChatRequest):
         return ChatResponse(reply=reply, model=model_used, tokens_used=tokens)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# Serve React static files — must be LAST
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
