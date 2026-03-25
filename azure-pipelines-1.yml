@@ -22,9 +22,9 @@ stages:
       name: Default
     steps:
     - script: |
-        echo "Build source dir: $(Build.SourcesDirectory)"
-        ls $(Build.SourcesDirectory)
-        ls $(Build.SourcesDirectory)/frontend
+        echo Build source dir: $(Build.SourcesDirectory)
+        dir $(Build.SourcesDirectory)
+        dir $(Build.SourcesDirectory)\frontend
       displayName: Debug - show files
 
     - task: Docker@2
